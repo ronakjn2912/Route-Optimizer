@@ -8,9 +8,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class RouteMapper {
     public Route toEntity(RouteRequest routeRequestDto){
-        Route route = new Route(routeRequestDto.getId(), routeRequestDto.getSourceHub(), routeRequestDto.getDestinationHub(), routeRequestDto.getDistance(), routeRequestDto.getTime());
 
-        return route;
+        return new Route(routeRequestDto.getId(), routeRequestDto.getSourceHub(), routeRequestDto.getDestinationHub(), routeRequestDto.getDistance(), routeRequestDto.getTime());
     }
 
     public RouteResponse toDto(Route routeEntity){
