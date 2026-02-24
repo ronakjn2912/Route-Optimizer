@@ -54,8 +54,7 @@ public class LogisticsService {
         return hubRepository.findAll();
     }
 
-    //need to return cost too
-    public OptimalRouteRespone optimizedRoute(int sourceHub, int destinationHub){//resume - Instantiation Exception
+    public OptimalRouteRespone optimizedRoute(int sourceHub, int destinationHub){
         log.info("Attempting to find optimal path between source : {} to destination : {}", sourceHub, destinationHub);
         if(!hubRepository.existsById(sourceHub) || !hubRepository.existsById(destinationHub)){
             log.warn("Make sure both hubs are created before searching for optimal path");
@@ -64,7 +63,6 @@ public class LogisticsService {
 
         List<Route> routes = routeRepository.findAll();
         List<Hub> hubs = hubRepository.findAll();
-
         HashMap<Integer, List<GraphNode>> graph = new HashMap<>();// SourceHub Id : {(Dest HubId, Cost)}
         for (Route route : routes){
             List<GraphNode> edges = new ArrayList<>();
