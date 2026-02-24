@@ -32,6 +32,17 @@ public class RouteFinder {
                     dist.put(node.getHubId(), newDistance+newTime);//update Distance map
                     toVisit.add(new GraphNode(node.getHubId(), newDistance, newTime));//update PQ
                     predecessor.put(node.getHubId(), new GraphNode(current.getHubId(), newDistance, newTime));//node which provided least cost
+                } else if (dist.get(node.getHubId()) == newDistance+newTime) {//test- RESUME
+                    int prevHubId = predecessor.get(node.getHubId()).getHubId();//previous stored
+                    int currHubId = current.getHubId();//new node which is giving equally shortest path
+                    while (prevHubId!=sourceHub && currHubId!=sourceHub){
+                        //we are checking which of the node reaches source hub with less number of hops
+                        prevHubId = predecessor.get(prevHubId).getHubId();
+                        currHubId = predecessor.get(currHubId).getHubId();
+                    }
+                    if (currHubId==sourceHub){
+                        predecessor.put(node.getHubId(), new GraphNode(current.getHubId(), newDistance, newTime));
+                    }
                 }
             }
         }while (!toVisit.isEmpty());
