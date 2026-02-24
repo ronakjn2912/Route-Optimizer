@@ -2,9 +2,11 @@ package com.app.RouteOptimizer.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
+@NoArgsConstructor
 public class Route {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
