@@ -122,5 +122,37 @@ public class RouteFinderTest {
 
     //all the edge cases for which tests need to be done
 
-    //4. Multiple paths with same cost → pick any (or the one with fewest hops if you want)
+    //4. Multiple paths with same cost → pick one with fewest hops
+    @Test
+    void GraphWithMultiplePaths(){
+        //Arrange
+        int testSource = 1, destinationSource = 5;
+
+        HashMap<Integer, List<GraphNode>> graph = new HashMap<>();
+
+        graph.put(1, List.of(new GraphNode(2, 2.0, 2.0), new GraphNode(3, 1.0, 2.0)));
+        graph.put(2, List.of(new GraphNode(5, 1.5, 1.5)));
+        graph.put(3, List.of(new GraphNode(4, 0.5, 0.0)));
+        graph.put(4, List.of(new GraphNode(5, 1.0, 2.5)));
+
+        HashMap<Integer, Double> dist = new HashMap<>();
+        for (int i=1;i<=5;i++){
+            if (i==testSource){
+                dist.put(i, (double)0);
+            }
+            dist.put(i, (double)Integer.MAX_VALUE);
+        }
+
+        //Act
+        OptimalRouteRespone shortestPathResponse = routeFinder.shortest(testSource, destinationSource, graph, dist);
+        List<Integer> path = shortestPathResponse.getHubIds();
+        Double totalDistance = shortestPathResponse.getTotalDistance();
+        Double totalTime = shortestPathResponse.getTotalTime();
+        log.info("shortest path between hubs : {} with distance : {} and time : {}", path, totalDistance, totalTime);
+
+        //Assert
+        assertThat(path).containsExactly(1,2,5);
+        assertThat(totalDistance).isEqualTo(3.5);
+        assertThat(totalTime).isEqualTo(3.5);
+    }
 }
