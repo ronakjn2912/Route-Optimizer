@@ -120,8 +120,6 @@ public class RouteFinderTest {
         assertThat(totalTime).isEqualTo(4.0);
     }
 
-    //all the edge cases for which tests need to be done
-
     //4. Multiple paths with same cost → pick one with fewest hops
     @Test
     void GraphWithMultiplePaths(){
