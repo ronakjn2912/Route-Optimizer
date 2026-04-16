@@ -27,7 +27,6 @@ public class LogisticsController {
     @PostMapping("/hubs")
     public ResponseEntity<Hub> createHub(@Valid @RequestBody Hub newHub) {//@Valid triggers methodArgumentNotValid exception
         //exception handled by global exception
-        System.out.println(newHub.getId());
         Hub response = logisticsService.createHub(newHub);
         return new ResponseEntity<>(response, HttpStatusCode.valueOf(201));
     }
@@ -35,7 +34,7 @@ public class LogisticsController {
     @GetMapping("/hubs")
     public ResponseEntity<List<Hub>> getHubs(){
         List<Hub> response = logisticsService.getHubs();
-        return new ResponseEntity<>(response, HttpStatus.valueOf(200));
+        return new ResponseEntity<>(response, HttpStatus.valueOf(201));
     }
 
     @PostMapping("/route")
