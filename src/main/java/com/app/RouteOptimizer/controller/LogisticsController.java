@@ -21,7 +21,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class LogisticsController {
 
-    private final LogisticsService logisticsService;
+    private final LogisticsService  logisticsService;
     private final RouteMapper routeMapper;
 
     @PostMapping("/hubs")
