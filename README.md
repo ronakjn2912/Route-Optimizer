@@ -115,9 +115,9 @@ H2 console is available at: `http://localhost:8080/h2-console`
 
 | Method | Endpoint | Description |
 |---|---|---|
-| `POST` | `/api/hubs` | Register a new hub/location |
-| `GET` | `/api/hubs` | List all available hubs |
-| `POST` | `/api/routes/optimize` | Find the optimal route between two hubs |
+| `POST` | `/api/v1/hubs` | Register a new hub/location |
+| `GET` | `/api/v1/hubs` | List all available hubs |
+| `POST` | `/api/v1/shortest-path` | Find the optimal route between two hubs |
 
 > Full request/response examples can be explored via the Postman collection (if shared) or directly through the H2 console.
 
