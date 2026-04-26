@@ -123,6 +123,30 @@ H2 console is available at: `http://localhost:8080/h2-console`
 
 ---
 
+## ⚡ Performance Testing
+
+Tested API performance using **Postman Collection Runner** to simulate real load on each endpoint.
+
+| Endpoint | Total Calls | Avg Response Time |
+|---|---|---|
+| `POST /api/hubs` (Hub Creation) | 500 | 209ms |
+| `POST /api/routes` (Route Creation) | 800 | 172ms |
+| `GET /api/routes/shortest` (Shortest Path) | 214 | 27ms |
+
+### Observations
+
+- The **shortest path finder** was the fastest at just **27ms avg**, which makes sense —
+  it's a read-heavy operation with no writes involved.
+- **Route creation** handled the highest load (800 calls) and still came in under 200ms,
+  which shows the service layer logic scales reasonably well.
+- **Hub creation** was the slowest at 209ms, likely due to the overhead of validation +
+  write operations on each call.
+
+> Tested locally using H2 in-memory database. Numbers will vary in a deployed environment
+> with a persistent DB, but this gives a solid baseline for how each layer behaves under load.
+
+---
+
 ## 🧪 Running Tests
 
 ```bash
