@@ -1,5 +1,6 @@
 package com.app.RouteOptimizer.service;
 
+import com.app.RouteOptimizer.dto.HubDto;
 import com.app.RouteOptimizer.dto.RouteRequest;
 import com.app.RouteOptimizer.entity.Hub;
 import com.app.RouteOptimizer.entity.Route;
@@ -40,7 +41,7 @@ public class LogisticsServiceTest {
     public void createHubTest(){//1. if hub is saved
 
         //Arrange
-        Hub fakeHub = new Hub(1, "Mumbai", "MUM");
+        Hub fakeHub = new Hub(null, "Mumbai", "MUM");//no generation of id required
         // Stub the existence check → false (hub does not exist yet)
         when(hubRepository.existsByLocationCode("MUM")).thenReturn(false);
 
@@ -48,7 +49,7 @@ public class LogisticsServiceTest {
                 .thenReturn(fakeHub);
 
         //Act
-        Hub result = logisticsService.createHub(fakeHub);
+        Hub result = logisticsService.createHub(new HubDto(fakeHub.getName(), fakeHub.getLocationCode()));
 
         //Assert
         assertThat(result.getName()).isEqualTo("Mumbai");
@@ -70,7 +71,7 @@ public class LogisticsServiceTest {
 
         //Act & Assert
         assertThrows(HubAlreadyExistsException.class,//expected type
-                ()->logisticsService.createHub(fakeHub),//executed by
+                ()->logisticsService.createHub(new HubDto(fakeHub.getName(), fakeHub.getLocationCode())),//executed by
                 "Hub Already Exists");//message
 
         //Verify

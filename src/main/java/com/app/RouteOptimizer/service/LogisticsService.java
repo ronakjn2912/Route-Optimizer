@@ -1,5 +1,6 @@
 package com.app.RouteOptimizer.service;
 
+import com.app.RouteOptimizer.dto.HubDto;
 import com.app.RouteOptimizer.dto.OptimalRouteRespone;
 import com.app.RouteOptimizer.dto.RouteRequest;
 import com.app.RouteOptimizer.entity.Hub;
@@ -27,14 +28,17 @@ public class LogisticsService {
     private final RouteMapper routeMapper;
     private final RouteFinder routeFinder;
 
-    public Hub createHub(Hub hub){
+    public Hub createHub(HubDto hub){
         log.info("Attempting to create a new hub with location code: {}", hub.getLocationCode());
         //hub already exists
         if (hubRepository.existsByLocationCode(hub.getLocationCode())){
             log.warn("Hub creation failed: Location code {} already exists", hub.getLocationCode());
             throw new HubAlreadyExistsException("Hub Already Exists");
         }
-        Hub savedHub = hubRepository.save(hub);
+        Hub request = new Hub();
+        request.setName(hub.getName());
+        request.setLocationCode(hub.getLocationCode());
+        Hub savedHub = hubRepository.save(request);
         log.info("Successfully created hub with ID: {}", savedHub.getId());
         return savedHub;
     }

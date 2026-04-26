@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RouteRequest {
-    private int id;
+    private Integer id;
     private Hub sourceHub;
     private Hub destinationHub;
 

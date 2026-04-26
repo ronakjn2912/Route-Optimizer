@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 public class RouteResponse {
-    private int id;
+    private Integer id;
     private Hub sourceHub;
     private Hub destinationHub;
     private Double distance;

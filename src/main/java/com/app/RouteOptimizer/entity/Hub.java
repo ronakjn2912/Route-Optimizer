@@ -16,7 +16,7 @@ public class Hub {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;//if provided int, then Jackson which serializes json object into java object assigns null to empty value, which throws exception as 'primitive' data types cannot be null.
     @NotBlank(message = "Name cannot be Empty")
     private String name;
     @Size(min = 3, max = 5, message = "Location code must be 3-5 characters")

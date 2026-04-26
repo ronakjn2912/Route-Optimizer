@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class Route {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "source_hub_id", nullable = false)
@@ -23,7 +23,7 @@ public class Route {
     private Double distance;
     private Double time;
 
-    public Route(int id, Hub sourceHub, Hub destinationHub, Double distance, Double time) {
+    public Route(Integer id, Hub sourceHub, Hub destinationHub, Double distance, Double time) {
         this.id = id;
         this.sourceHub = sourceHub;
         this.destinationHub = destinationHub;
